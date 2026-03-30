@@ -138,11 +138,21 @@ p {
 /* Hero Section */
 .hero {
     height: 100vh;
-    background: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    background: #000;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+    overflow: hidden;
+}
+
+#panorama-viewer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: auto;
 }
 
 .hero-overlay {
@@ -152,6 +162,88 @@ p {
     width: 100%;
     height: 100%;
     background: linear-gradient(45deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 20px;
+    pointer-events: auto;
+}
+
+/* Panolens control styling for readability */
+.panolens-setting-list,
+.panolens-setting-list li,
+.panolens-setting-item,
+.panolens-setting-item a,
+.panolens-control-panel,
+.panolens-tooltip,
+.panolens-bounding-box,
+.panolens-setting-list li a,
+.panolens-setting-list li span,
+.panolens-setting-item span {
+    background: rgba(0, 0, 0, 0.95) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+}
+
+.panolens-setting-item a,
+.panolens-setting-list li,
+.panolens-setting-list li a,
+.panolens-setting-list li span,
+.panolens-setting-item span {
+    color: #fff !important;
+}
+
+[class*="panolens"],
+[class^="panolens"],
+[class$="panolens"],
+[class*="panolens"] *,
+[class^="panolens"] *,
+[class$="panolens"] * {
+    background: rgba(0, 0, 0, 0.92) !important;
+    color: #fff !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    text-shadow: 0 0 8px rgba(0,0,0,0.9) !important;
+}
+
+.panolens-setting-list li:hover,
+.panolens-setting-item:hover,
+.panolens-control:hover,
+.panolens-setting-list li.active,
+.panolens-setting-item.active {
+    background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.panolens-setting-list li a,
+.panolens-setting-list li span,
+.panolens-setting-item a,
+.panolens-setting-item span,
+.panolens-setting-text,
+.panolens-setting-value {
+    color: #fff !important;
+    opacity: 0.95 !important;
+}
+
+.panolens-setting-list li:hover,
+.panolens-setting-item:hover,
+.panolens-control:hover,
+.panolens-setting-list li.active,
+.panolens-setting-item.active {
+    background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.panolens-setting-list li a,
+.panolens-setting-list li span,
+.panolens-setting-item a,
+.panolens-setting-item span,
+.panolens-setting-text,
+.panolens-setting-value {
+    color: #fff !important;
+    opacity: 0.95 !important;
 }
 
 .hero-content {

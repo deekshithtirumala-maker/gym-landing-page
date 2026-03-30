@@ -237,6 +237,106 @@ document.querySelectorAll('.program-card, .trainer-card, .pricing-card').forEach
 });
 
 // Initialize
+function initPanorama() {
+    const panoramaContainer = document.getElementById('panorama-viewer');
+    if (!panoramaContainer || typeof PANOLENS === 'undefined') {
+        return;
+    }
+
+    const viewer = new PANOLENS.Viewer({
+        container: panoramaContainer,
+        output: 'overlay',
+        autoRotate: false,
+        autoRotateSpeed: 0.3,
+        autoHideInfospot: false,
+        cameraFov: 70,
+        controlBar: true,
+        controlButtons: ['fullscreen', 'setting', 'video', 'camera'],
+        enableReticle: false,
+        enableZoom: true,
+        zoomSpeed: 1.2,
+        enablePan: true
+    });
+
+    const panorama = new PANOLENS.ImagePanorama('around.jpg');
+
+    panorama.addEventListener('progress', (event) => {
+        const progress = Math.round(event.progress.loaded / event.progress.total * 100);
+        // Optional: show progress or loader
+        // console.log('Panorama loading: ' + progress + '%');
+    });
+
+    panorama.addEventListener('load', () => {
+        console.info('Panorama loaded successfully from around.jpg');
+    });
+
+    panorama.addEventListener('error', (evt) => {
+        console.error('Panorama failed to load around.jpg; this often happens with file:// URL and CORS. ' +
+            'Serve the site over http://localhost to fix. Falling back to online test panorama.');
+
+        panorama.dispose();
+
+        const fallbackPanorama = new PANOLENS.ImagePanorama('https://pchen66.github.io/Panolens/examples/img/equirectangular/royal_esplanade.jpg');
+        fallbackPanorama.addEventListener('load', () => {
+            console.info('Fallback panorama loaded successfully.');
+        });
+        viewer.add(fallbackPanorama);
+    });
+
+    panorama.addEventListener('enter', () => {
+        // Ensure overlay stays visible and text is on top
+        panoramaContainer.style.opacity = '1';
+    });
+
+    viewer.add(panorama);
+
+    // Allow page scrolling even when mouse is on panorama
+    panoramaContainer.style.pointerEvents = 'auto';
+    panoramaContainer.addEventListener('wheel', (e) => {
+        if (e.ctrlKey) {
+            // allow ctrl+wheel zoom
+            return;
+        }
+        e.preventDefault();
+        window.scrollBy({ top: e.deltaY, behavior: 'smooth' });
+    }, { passive: false });
+}
+
+function stylePanolensUI() {
+    const selectors = [
+        '[class*="panolens"]',
+        '.panolens-control-panel',
+        '.panolens-setting-list',
+        '.panolens-setting-item',
+        '.panolens-setting',
+        '.panolens-control',
+        '.panolens-label',
+        '.panolens-tooltip',
+        '.panolens-views',
+        '.panolens-content'
+    ];
+    selectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(el => {
+            el.style.background = 'rgba(0, 0, 0, 0.9)';
+            el.style.color = '#fff';
+            el.style.border = '1px solid rgba(255, 255, 255, 0.35)';
+            el.style.textShadow = '0 0 4px rgba(0,0,0,0.8)';
+        });
+    });
+
+    document.querySelectorAll('.panolens-setting-list li, .panolens-setting-item').forEach(el => {
+        el.style.background = 'rgba(0,0,0,0.4)';
+        el.style.color = '#fff';
+        el.style.fontWeight = '600';
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     showSlide(0);
+    initPanorama();
+
+    // Apply immediately and reactively for dynamically inserted Panolens UI.
+    stylePanolensUI();
+    const observer = new MutationObserver(() => stylePanolensUI());
+    observer.observe(document.body, { childList: true, subtree: true });
 });
