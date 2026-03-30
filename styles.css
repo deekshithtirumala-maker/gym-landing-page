@@ -246,6 +246,18 @@ p {
     opacity: 0.95 !important;
 }
 
+/* Hide Panolens settings UI entirely */
+.panolens-control,
+.panolens-control-panel,
+.panolens-setting-list,
+.panolens-setting-item,
+.panolens-views,
+.panolens-tooltip {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
 .hero-content {
     text-align: center;
     z-index: 1;

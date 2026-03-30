@@ -250,8 +250,8 @@ function initPanorama() {
         autoRotateSpeed: 0.3,
         autoHideInfospot: false,
         cameraFov: 70,
-        controlBar: true,
-        controlButtons: ['fullscreen', 'setting', 'video', 'camera'],
+        controlBar: false, // disable controls entirely
+        controlButtons: [],
         enableReticle: false,
         enableZoom: true,
         zoomSpeed: 1.2,
