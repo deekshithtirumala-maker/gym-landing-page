@@ -333,7 +333,7 @@ function stylePanolensUI() {
 
 document.addEventListener('DOMContentLoaded', () => {
     showSlide(0);
-    initPanorama();
+    // initPanorama(); // Commented out - using static background image instead
 
     // Apply immediately and reactively for dynamically inserted Panolens UI.
     stylePanolensUI();

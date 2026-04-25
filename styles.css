@@ -138,21 +138,15 @@ p {
 /* Hero Section */
 .hero {
     height: 100vh;
-    background: #000;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url('hero-background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
-}
-
-#panorama-viewer {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: auto;
 }
 
 .hero-overlay {
@@ -391,8 +385,9 @@ p {
 
 .trainer-card img {
     width: 100%;
-    height: 250px;
+    height: 300px;
     object-fit: cover;
+    object-position: center 30%;
 }
 
 .trainer-info {
@@ -402,6 +397,36 @@ p {
 .trainer-info h3 {
     color: #ff6b35;
     margin-bottom: 0.5rem;
+}
+
+.trainer-level,
+.trainer-experience,
+.trainer-specialization,
+.trainer-certifications,
+.trainer-achievements,
+.trainer-contact {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin: 0.5rem 0;
+}
+
+.specializations {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.specializations li {
+    color: #aaa;
+    padding: 0.3rem 0;
+}
+
+.specializations li:before {
+    content: "✓ ";
+    color: #ff6b35;
+    font-weight: bold;
+    margin-right: 0.5rem;
 }
 
 .social-links {
@@ -572,6 +597,34 @@ p {
 
 .gallery-item:hover img {
     transform: scale(1.1);
+}
+
+/* Video Section */
+.video-section {
+    padding: 5rem 0;
+    background: #111;
+}
+
+.video-section h2 {
+    margin-bottom: 3rem;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(255, 107, 53, 0.3);
+    aspect-ratio: 9 / 16;
+}
+
+.video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 /* CTA Section */
@@ -853,4 +906,32 @@ footer {
         padding: 10px 20px;
         font-size: 0.9rem;
     }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: darkorange;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #FF4500;
+}
+
+/* Hide scrollbar after scrolling */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: orange transparent;
+}
+
+body {
+    overflow: auto;
 }
