@@ -935,3 +935,89 @@ html {
 body {
     overflow: auto;
 }
+
+/* Mobile Performance Optimizations */
+@media (max-width: 768px) {
+    /* Disable animations on mobile for faster rendering */
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    h1 {
+        font-size: 1.75rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero {
+        min-height: 60vh;
+        padding: 60px 20px 40px;
+    }
+    
+    .hero-content h1 {
+        font-size: 1.5rem !important;
+    }
+    
+    .hero-content p {
+        font-size: 0.9rem;
+    }
+    
+    .btn {
+        padding: 8px 20px !important;
+        font-size: 0.85rem !important;
+    }
+    
+    .trainer-card,
+    .testimonial,
+    .gallery-item {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .trainer-card img,
+    .testimonial img,
+    .gallery-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    /* Reduce image sizes for faster download */
+    .testimonial img {
+        width: 70px;
+        height: 70px;
+        margin: 0 auto;
+    }
+    
+    .video-container {
+        max-width: 100%;
+        margin: 0 -20px;
+        border-radius: 0;
+    }
+    
+    .gallery-grid {
+        gap: 8px;
+    }
+    
+    .gallery-item {
+        min-height: 150px;
+    }
+    
+    /* Reduce navbar complexity */
+    nav {
+        backdrop-filter: none;
+        background: rgba(0,0,0,0.95);
+    }
+    
+    /* Reduce form complexity */
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        font-size: 16px; /* Prevents auto-zoom on iOS */
+    }
+}

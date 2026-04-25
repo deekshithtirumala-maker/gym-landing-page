@@ -10,16 +10,36 @@ const calculateBmiBtn = document.getElementById('calculate-bmi');
 const bmiValue = document.getElementById('bmi-value');
 const bmiCategory = document.getElementById('bmi-category');
 
-// Navbar scroll effect
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(0, 0, 0, 0.95)';
-        navbar.style.backdropFilter = 'blur(20px)';
-    } else {
-        navbar.style.background = 'rgba(0, 0, 0, 0.9)';
-        navbar.style.backdropFilter = 'blur(10px)';
-    }
+// Detect if mobile device
+const isMobile = window.innerWidth < 768;
+
+// Enable async image decoding for performance
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('img').forEach(img => {
+        img.decoding = 'async';
+    });
 });
+
+// Navbar scroll effect - disabled on mobile for performance
+window.addEventListener('scroll', () => {
+    if (isMobile) {
+        // Lightweight scroll effect for mobile - no blur animation
+        if (window.scrollY > 100) {
+            navbar.style.background = 'rgba(0, 0, 0, 0.98)';
+        } else {
+            navbar.style.background = 'rgba(0, 0, 0, 0.95)';
+        }
+    } else {
+        // Full effect for desktop
+        if (window.scrollY > 100) {
+            navbar.style.background = 'rgba(0, 0, 0, 0.95)';
+            navbar.style.backdropFilter = 'blur(20px)';
+        } else {
+            navbar.style.background = 'rgba(0, 0, 0, 0.9)';
+            navbar.style.backdropFilter = 'blur(10px)';
+        }
+    }
+}, { passive: true });
 
 // Mobile menu toggle
 hamburger.addEventListener('click', () => {
@@ -27,7 +47,7 @@ hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
 });
 
-// Smooth scrolling for navigation links
+// Smooth scrolling for navigation links - optimized for mobile
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -39,7 +59,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
             window.scrollTo({
                 top: offsetPosition,
-                behavior: 'smooth'
+                behavior: isMobile ? 'auto' : 'smooth'
             });
         }
         // Close mobile menu after clicking
@@ -70,8 +90,17 @@ function prevSlide() {
     showSlide(currentSlide);
 }
 
-// Auto slide testimonials
-setInterval(nextSlide, 5000);
+// Auto slide testimonials - defer on mobile for performance
+if (isMobile) {
+    // Defer auto-slide on mobile until idle
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(() => setInterval(nextSlide, 5000));
+    } else {
+        setTimeout(() => setInterval(nextSlide, 5000), 2000);
+    }
+} else {
+    setInterval(nextSlide, 5000);
+}
 
 // Dot navigation
 dots.forEach((dot, index) => {
