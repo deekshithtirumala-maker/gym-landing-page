@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://www.legendfitnessclub.com/sitemap.xml
+Sitemap: https://legendfitnesscenter.netlify.app/sitemap.xml
