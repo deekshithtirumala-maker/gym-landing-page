@@ -1,7 +1,7 @@
 # Legend Fitness Center Website
 
 Live demo
-- https://legendfitnesscenter.netlify.app/
+- https://legendfitnessclub.com/
 
 ## Overview
 A modern, premium dark-theme gym website built with pure HTML, CSS, and JavaScript (no frameworks required). The design is conversion-focused and responsive for mobile/tablet/desktop.
@@ -24,7 +24,7 @@ A modern, premium dark-theme gym website built with pure HTML, CSS, and JavaScri
 
 ## Contact Info in Page
 - Phone: 9492740785
-- Email: deekshith.tirumala@gmail.com
+- Email: Legendfitnessclub4@gmail.com
 - Address: Kalimandir Main Rd, near HP Petrol Bunk, Abhyudaya Nagar, Sun City, Bandlaguda Jagir, Hyderabad, Telangana 500086
 
 ## Getting Started
