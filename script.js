@@ -154,8 +154,15 @@ function getContactData() {
 
 whatsappSend.addEventListener('click', () => {
     const { name, email, phone, message } = getContactData();
-    const baseText = `Hey GymPro!%0AI'd like more info about membership and training.%0A%0AName: ${encodeURIComponent(name || 'N\/A')}%0AEmail: ${encodeURIComponent(email || 'N\/A')}%0APhone: ${encodeURIComponent(phone || 'N\/A')}%0AMessage: ${encodeURIComponent(message || 'N\/A')}`;
-    const url = `https://wa.me/919492740785?text=${baseText}`;
+    const fields = [];
+
+    if (name) fields.push(`Name: ${encodeURIComponent(name)}`);
+    if (email) fields.push(`Email: ${encodeURIComponent(email)}`);
+    if (phone) fields.push(`Phone: ${encodeURIComponent(phone)}`);
+    if (message) fields.push(`Message: ${encodeURIComponent(message)}`);
+
+    const baseText = `Hey Legend Fitness Club!%0AI'd like more info about membership and training.%0A%0A${fields.join('%0A')}`;
+    const url = `https://wa.me/918978411234?text=${baseText}`;
 
     window.open(url, '_blank');
 });
@@ -163,7 +170,15 @@ whatsappSend.addEventListener('click', () => {
 emailSend.addEventListener('click', () => {
     const { name, email, phone, message } = getContactData();
     const subject = encodeURIComponent('GymPro Inquiry');
-    const body = encodeURIComponent(`Hello GymPro team,\n\nI'd like to connect regarding membership and training.\n\nName: ${name || 'N/A'}\nEmail: ${email || 'N/A'}\nPhone: ${phone || 'N/A'}\nMessage: ${message || 'N/A'}\n\nAddress: Kalimandir Main Rd, near HP Petrol Bunk, Abhyudaya Nagar, Sun City, Bandlaguda Jagir, Hyderabad, Telangana 500086`);
+    const lines = [];
+
+    if (name) lines.push(`Name: ${name}`);
+    if (email) lines.push(`Email: ${email}`);
+    if (phone) lines.push(`Phone: ${phone}`);
+    if (message) lines.push(`Message: ${message}`);
+
+    const details = lines.length ? `\n\n${lines.join('\n')}` : '';
+    const body = encodeURIComponent(`Hello GymPro team,\n\nI'd like to connect regarding membership and training.${details}\n\nAddress: Kalimandir Main Rd, near HP Petrol Bunk, Abhyudaya Nagar, Sun City, Bandlaguda Jagir, Hyderabad, Telangana 500086`);
     const mailtoLink = `mailto:info@gympro.com?subject=${subject}&body=${body}`;
 
     window.location.href = mailtoLink;
